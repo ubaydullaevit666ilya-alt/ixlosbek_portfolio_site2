@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="{{ project.name }} — проект в портфолио Ихлосбека.">
+  <title>{{ project.name }} — {{ name }} Portfolio</title>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("portfolio-theme")||"dark"}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script defer src="{% static 'theme.js' %}"></script>
+  <script defer src="{% static 'background.js' %}"></script>
+</head>
+<body class="detail-page">
+  <video class="bg-video" muted loop playsinline preload="none" poster="{% static 'bg-poster.jpg' %}" aria-hidden="true" tabindex="-1">
+    <source src="{% static 'bg.mp4' %}" type="video/mp4">
+  </video>
+  <div class="bg-shade"></div>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><div class="noise"></div>
+  <header class="nav-wrap">
+    <nav class="nav">
+      <a class="brand" href="{% url 'home' %}"><span class="brand-icon">IX</span><span>IXLOSBEK<span class="brand-dot">.</span></span></a>
+      <div class="nav-actions">
+        <a class="back-link" href="{% url 'home' %}#projects">← Все проекты</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">☼ Светлая</button>
+      </div>
+    </nav>
+  </header>
+  <main class="detail-main">
+    <div class="detail-kicker">PROJECT / {{ project.number }} · PORTFOLIO</div>
+    <h1>{{ project.name }}</h1>
+    <p class="detail-description">{{ project.description }}</p>
+    <div class="detail-panel">
+      <div class="detail-panel-top"><span>PROJECT OVERVIEW</span><span class="online-indicator"><i></i> LIVE PROJECT</span></div>
+      <h2>О проекте</h2>
+      <p>{{ project.description }}</p>
+      <h2>Технологии и теги</h2>
+      <div class="chips detail-chips">{% for tag in project.tags %}<span>{{ tag }}</span>{% endfor %}</div>
+      <div class="detail-actions">
+        <a class="button button-primary" href="{{ project.url }}" target="_blank" rel="noopener noreferrer">{{ project.action }} <span>↗</span></a>
+        <a class="button button-ghost" href="{% url 'home' %}#projects">Назад к портфолио</a>
+      </div>
+    </div>
+  </main>
+  <footer><a class="brand" href="{% url 'home' %}"><span class="brand-icon">IX</span><span>IXLOSBEK<span class="brand-dot">.</span></span></a><span>© {{ name }} · 2026</span><a href="{% url 'home' %}#home">НАВЕРХ ↑</a></footer>
+  <div class="atmosphere-control" id="atmosphereControl" aria-label="Управление анимированным фоном">
+    <span class="atmosphere-orb" aria-hidden="true"></span>
+    <span class="atmosphere-copy"><b>ATMOSPHERE</b><small id="atmosphereStatus">LIVE / ACTIVE</small></span>
+    <button id="atmosphereToggle" type="button" aria-pressed="false" aria-label="Приостановить анимацию фона">Пауза</button>
+  </div>
+</body>
+</html>

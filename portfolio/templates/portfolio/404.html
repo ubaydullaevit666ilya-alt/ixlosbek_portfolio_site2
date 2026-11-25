@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <title>Страница не найдена — {{ name }}</title>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("portfolio-theme")||"dark"}catch(e){}</script>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script defer src="{% static 'theme.js' %}"></script>
+</head>
+<body class="detail-page">
+  <main class="not-found">
+    <div class="detail-kicker">ERROR / 404</div>
+    <h1>404<span>.</span></h1>
+    <p>Такой страницы нет. Вернись на главную и продолжай изучать портфолио.</p>
+    <a class="button button-primary" href="{% url 'home' %}">На главную <span>↗</span></a>
+  </main>
+</body>
+</html>

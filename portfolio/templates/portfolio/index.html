@@ -1,0 +1,325 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="Портфолио Ихлосбека — Python и веб-разработка.">
+  <meta property="og:title" content="{{ name }} — Developer Portfolio">
+  <meta property="og:description" content="Python и веб-разработка: проекты, навыки, контакты.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23c5ff5a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' text-anchor='middle' fill='%2310150a'%3EIX%3C/text%3E%3C/svg%3E">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("portfolio-theme")||"dark"}catch(e){}</script>
+  <noscript><style>.boot-screen{display:none!important}body.booting{overflow:auto}.reveal{opacity:1!important;transform:none!important}.skill-track i{width:var(--lvl)!important}</style></noscript>
+  <title>{{ name }} — Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script defer src="{% static 'theme.js' %}"></script>
+  <script defer src="{% static 'background.js' %}"></script>
+  <script defer src="{% static 'app.js' %}"></script>
+  <script defer src="{% static 'polish.js' %}"></script>
+  <script defer src="{% static 'features.js' %}"></script>
+</head>
+<body>
+  <video class="bg-video" muted loop playsinline preload="none" poster="{% static 'bg-poster.jpg' %}" aria-hidden="true" tabindex="-1">
+    <source src="{% static 'bg.mp4' %}" type="video/mp4">
+  </video>
+  <div class="bg-shade"></div>
+  <div class="boot-screen" id="bootScreen" aria-label="Инициализация сайта" data-lines="{{ boot_lines_json|escape }}">
+    <div class="boot-panel">
+      <div class="boot-top">
+        <span class="boot-mark"><i></i> IX / SYSTEM</span>
+        <span class="boot-status"><b></b> ONLINE</span>
+      </div>
+      <div class="boot-title">СОЗДАЮ<br><span>ИНТЕРФЕЙС</span></div>
+      <div class="terminal" id="terminal" aria-live="polite">
+        <div class="terminal-head"><span>portfolio.init</span><span>PYTHON · DJANGO</span></div>
+        <div id="terminalLines"></div>
+        <div class="terminal-cursor"><span></span></div>
+      </div>
+      <div class="boot-bottom">
+        <div class="progress-track"><span id="progressBar"></span></div>
+        <div class="progress-meta"><span id="progressText">0%</span><span>BUILDING PERSONAL WEBSITE</span></div>
+      </div>
+      <button class="skip-boot" id="skipBoot" type="button">Пропустить интро ↗</button>
+    </div>
+  </div>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="noise"></div>
+
+  <header class="nav-wrap"><nav class="nav">
+    <a class="brand" href="#home"><span class="brand-icon">IX</span><span>IXLOSBEK<span class="brand-dot">.</span></span></a>
+    <div class="nav-links">
+      <a href="#projects">Проекты</a>
+      <a href="#skills">Навыки</a>
+      <a href="#about">Обо мне</a>
+      <a href="#timeline">Путь</a>
+      <a href="#console">Терминал</a>
+      <a href="#lab">Лаборатория</a>
+      <a href="#assistant">AI</a>
+      <a href="#contact" class="nav-contact">Связаться <span>↗</span></a>
+    </div>
+    <div class="nav-actions">
+      <button class="palette-toggle" id="paletteToggle" type="button" aria-label="Открыть быстрые команды" title="Быстрые команды · Ctrl K">CTRL K</button>
+      <button class="accent-toggle" id="accentToggle" type="button" aria-label="Сменить цветовой акцент" title="Сменить цветовой акцент">◉</button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">☼ Светлая</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <button class="secret-trigger" id="secretTrigger" aria-label="Открыть секретный раздел">✦</button>
+    </div>
+
+</nav></header> 
+  
+  <main>
+    <section class="hero reveal" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> OPEN TO LEARNING & COLLABORATION</div>
+        <h1>ПРИВЕТ,<br>Я <span class="gradient-name">{{ name|upper }}</span><span class="hero-period">.</span></h1>
+        <div class="role-line"><span class="role-prompt">&gt;&gt;&gt;</span> <span id="roleText" data-roles="{{ roles_json|escape }}">{{ roles.0 }}</span><span class="role-caret"></span></div>
+        <p class="hero-description">Начинающий разработчик. Создаю веб-проекты, изучаю Python и превращаю идеи в работающие цифровые продукты.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects">Смотреть проекты <span>↘</span></a>
+          <a class="button button-ghost" href="#about">Обо мне</a>
+        </div>
+        <div class="hero-meta"><span>PORTFOLIO / 2026</span><span class="meta-line"></span><span>PYTHON DEVELOPER</span><span class="meta-clock" id="localClock">--:--:--</span></div>
+        <div class="hero-extra-actions"><button class="text-action" id="sharePortfolio" type="button">Поделиться портфолио <span>↗</span></button><button class="text-action" id="surpriseProject" type="button">Случайный проект <span>✦</span></button></div>
+      </div>
+      <div class="hero-visual" aria-label="Окно с Python-кодом">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="code-window">
+          <div class="code-head"><i></i><i></i><i></i><span>portfolio.py</span></div>
+          <pre class="code-body" id="codeBody" data-code="{{ snippet_json|escape }}" aria-label="Python-код"></pre>
+        </div>
+        <div class="visual-label label-top">CREATIVE<br>DEVELOPMENT</div>
+        <div class="visual-label label-bottom">BUILD / LEARN / REPEAT</div>
+        <div class="visual-cross cross-one">+</div><div class="visual-cross cross-two">+</div>
+      </div>
+      <div class="scroll-hint"><span></span> SCROLL TO EXPLORE</div>
+    </section>
+
+    <div class="stats reveal">
+      {% for stat in stats %}<div class="stat"><b data-count="{{ stat.value }}">0</b><span>{{ stat.label }}</span></div>{% endfor %}
+    </div>
+
+    <div class="marquee reveal" aria-hidden="true"><div class="marquee-track">{% for item in marquee_twice %}<span>{{ item }}</span><i>✦</i>{% endfor %}</div></div>
+
+    <section class="section reveal" id="projects">
+      <div class="section-heading"><div><span class="section-index">01 — SELECTED WORK</span><h2>МОИ <em>ПРОЕКТЫ</em></h2></div><p>Идеи, эксперименты<br>и проекты в разработке.</p></div>
+      <div class="project-tools">
+        <label class="project-search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="projectSearch" type="search" placeholder="Поиск по названию, описанию или тегам..." autocomplete="off" aria-label="Поиск проектов">
+        </label>
+        <div class="project-filters" id="projectFilters" aria-label="Фильтры проектов">
+          <button class="filter-chip active" type="button" data-filter="all" aria-pressed="true">Все</button>
+          {% for item in project_filters %}
+          <button class="filter-chip" type="button" data-filter="{{ item|lower }}" aria-pressed="false">{{ item }}</button>
+          {% endfor %}
+        </div>
+        <div class="project-extra-controls">
+          <button class="filter-chip favorite-filter" id="favoriteOnly" type="button" aria-pressed="false">☆ Избранное <span id="favoriteCount">0</span></button>
+          <label class="sort-control"><span>Сортировка</span><select id="projectSort" aria-label="Сортировка проектов"><option value="featured">По умолчанию</option><option value="az">А → Я</option><option value="za">Я → А</option></select></label>
+          <button class="reset-projects" id="resetProjects" type="button">Сбросить</button>
+        </div>
+        <p class="project-result" id="projectResult" aria-live="polite">Показаны все проекты</p>
+      </div>
+      <div class="project-grid" id="projectGrid">
+        {% for project in projects %}
+        <article class="project-card reveal" data-slug="{{ project.slug }}" data-tags="{{ project.tags_lower }}" data-search="{{ project.search_text }}">
+          <div class="project-top"><span class="project-number">{{ project.number }}</span><span class="project-arrow">↗</span></div>
+          <h3>{{ project.name }}</h3>
+          <p>{{ project.description }}</p>
+          <div class="chips">{% for tag in project.tags %}<span>{{ tag }}</span>{% endfor %}</div>
+          <div class="project-card-actions">
+            <a class="project-link" href="{% url 'project_detail' project.slug %}">Подробнее <span>→</span></a>
+            <button class="project-preview-button" type="button" data-preview>Быстрый просмотр</button>
+            <button class="project-save" type="button" aria-label="Добавить {{ project.name }} в избранное" aria-pressed="false">☆</button>
+            <a class="project-live" href="{{ project.url }}" target="_blank" rel="noopener noreferrer">{{ project.action }} ↗</a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      <div class="empty-projects" id="emptyProjects" hidden>Ничего не найдено. Попробуй изменить запрос или фильтр.</div>
+    </section>
+
+    <section class="section reveal" id="skills">
+      <div class="section-heading"><div><span class="section-index">02 — TOOLKIT</span><h2>МОИ <em>НАВЫКИ</em></h2></div><p>Инструменты, с которыми<br>я создаю свои проекты.</p></div>
+      <div class="skills-layout">
+        <div class="skills-intro"><div class="skill-symbol">{"<>"}</div><h3>Постоянно<br>изучаю новое.</h3><p>Каждый проект — возможность освоить технологию и стать лучше.</p></div>
+        <div class="skill-list">
+          {% for skill in skills %}
+          <div class="skill-item">
+            <div class="skill-info"><div><h3>{{ skill.name }}</h3><p>{{ skill.description }}</p></div><span>{{ skill.level }}%</span></div>
+            <div class="skill-track"><i data-level="{{ skill.level }}" style="--lvl:{{ skill.level }}%"></i></div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="about">
+      <div class="section-heading"><div><span class="section-index">03 — A LITTLE ABOUT ME</span><h2>ОБО <em>МНЕ</em></h2></div></div>
+      <div class="about-card"><div class="about-number">IX.</div><div><h3>Учусь. Практикуюсь. Создаю.</h3><p>Я прошёл годовые курсы программирования и продолжаю учиться на практике: создаю собственные проекты и публикую их в интернете. Хочу развиваться в веб-разработке на Python, пробовать новые технологии и работать над интересными задачами.</p></div><div class="about-stamp">MADE<br>WITH<br>IDEAS</div></div>
+    </section>
+
+    <section class="section reveal" id="timeline">
+      <div class="section-heading"><div><span class="section-index">04 — MY JOURNEY</span><h2>МОЙ <em>ПУТЬ</em></h2></div><p>От первых уроков<br>до собственных проектов.</p></div>
+      <div class="timeline-list">
+        {% for item in timeline %}
+        <article class="timeline-item">
+          <span class="timeline-marker"></span>
+          <div class="timeline-label">{{ item.label }}</div>
+          <div class="timeline-content"><h3>{{ item.title }}</h3><p>{{ item.description }}</p></div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="section reveal" id="console">
+      <div class="section-heading"><div><span class="section-index">05 — INTERACTIVE MODE</span><h2>WEB <em>TERMINAL</em></h2></div><p>Небольшая консоль<br>с командами портфолио.</p></div>
+      <div class="terminal-widget" data-telegram="{{ telegram }}" data-email="{{ email }}">
+        <div class="widget-head"><span><i></i> ixlosbek@portfolio:~</span><span>LOCAL CONSOLE</span></div>
+        <div class="terminal-output" id="terminalOutput" aria-live="polite"><p>Добро пожаловать в IX Terminal. Введи <b>help</b>, чтобы увидеть команды.</p></div>
+        <form class="terminal-form" id="terminalForm">
+          <label for="terminalInput"><span>guest@ixlosbek:~$</span></label>
+          <input id="terminalInput" type="text" placeholder="help" autocomplete="off" spellcheck="false" aria-label="Команда терминала">
+          <button type="submit">Выполнить ↵</button>
+        </form>
+        <p class="widget-note">Это демонстрационная консоль сайта. Она не выполняет команды операционной системы.</p>
+      </div>
+    </section>
+
+
+    <section class="section reveal" id="lab">
+      <div class="section-heading"><div><span class="section-index">06 — INTERACTIVE TOOLBOX</span><h2>МОЯ <em>ЛАБОРАТОРИЯ</em></h2></div><p>Инструменты и мини-приложения<br>прямо внутри портфолио.</p></div>
+      <div class="lab-grid">
+        <article class="lab-card lab-wide"><span class="lab-kicker">01 / FOCUS TIMER</span><h3>Pomodoro</h3><p>25 минут концентрации и короткий перерыв.</p><div class="pomodoro-time" id="pomodoroTime">25:00</div><div class="lab-actions"><button type="button" class="lab-button" id="pomodoroStart">Старт</button><button type="button" class="lab-button lab-secondary" id="pomodoroReset">Сброс</button></div><small id="pomodoroStatus" aria-live="polite">Готов к работе</small></article>
+        <article class="lab-card"><span class="lab-kicker">02 / QUICK NOTES</span><h3>Заметки</h3><p>Сохраняются в этом браузере.</p><textarea id="quickNote" rows="4" placeholder="Запиши идею проекта..."></textarea><div class="lab-actions"><button type="button" class="lab-button" id="saveNote">Сохранить</button><button type="button" class="lab-button lab-secondary" id="clearNote">Очистить</button></div><small id="noteStatus" aria-live="polite">Локальное хранение</small></article>
+        <article class="lab-card"><span class="lab-kicker">03 / TEXT TOOL</span><h3>Счётчик текста</h3><p>Слова, символы и примерное время чтения.</p><textarea id="wordText" rows="4" placeholder="Вставь текст сюда..."></textarea><div class="lab-metrics"><b id="wordCount">0 <small>слов</small></b><b id="charCount">0 <small>символов</small></b><b id="readTime">0 <small>мин чтения</small></b></div></article>
+        <article class="lab-card"><span class="lab-kicker">04 / PROJECT COMPARE</span><h3>Сравнение проектов</h3><p>Отметь проекты звёздочкой-сравнением в карточках.</p><div id="compareOutput" class="compare-output">Пока ничего не выбрано.</div><button type="button" class="lab-button lab-secondary" id="clearCompare">Очистить сравнение</button></article>
+        <article class="lab-card"><span class="lab-kicker">05 / RANDOM IDEAS</span><h3>Случайный проект</h3><p>Выбери, что посмотреть следующим.</p><div class="random-result" id="randomProject">Нажми кнопку — и получи идею.</div><button type="button" class="lab-button" id="randomProjectButton">Удиви меня ✦</button></article>
+        <article class="lab-card"><span class="lab-kicker">06 / EXPORT</span><h3>Экспорт портфолио</h3><p>Скачай список проектов в формате JSON.</p><button type="button" class="lab-button" id="exportProjects">Скачать проекты ↓</button><button type="button" class="lab-button lab-secondary" id="printPortfolio">Печать / PDF</button></article>
+        <article class="lab-card"><span class="lab-kicker">07 / ACCESSIBILITY</span><h3>Режим чтения</h3><p>Уменьшает визуальные эффекты и помогает сосредоточиться.</p><button type="button" class="lab-button" id="readingMode">Включить режим чтения</button><button type="button" class="lab-button lab-secondary" id="fontSizeToggle">Увеличить текст</button></article>
+        <article class="lab-card"><span class="lab-kicker">08 / PERSONALIZATION</span><h3>Персонализация</h3><p>Настрой акцентный цвет и анимацию.</p><div class="lab-actions"><button type="button" class="lab-button" id="cycleAccent">Сменить акцент</button><button type="button" class="lab-button lab-secondary" id="toggleEffects">Эффекты: вкл.</button></div><button type="button" class="lab-button lab-secondary" id="resetPreferences">Сбросить настройки</button></article>
+        <article class="lab-card"><span class="lab-kicker">09 / FAVORITES</span><h3>Избранное</h3><p>Управляй сохранёнными проектами.</p><div class="random-result" id="favoritesSummary">Избранных проектов пока нет.</div><button type="button" class="lab-button lab-secondary" id="clearFavorites">Очистить избранное</button></article>
+        <article class="lab-card"><span class="lab-kicker">10 / SHORTCUTS</span><h3>Горячие клавиши</h3><p><kbd>Ctrl</kbd> + <kbd>K</kbd> — команды · <kbd>H</kbd> — главная · <kbd>P</kbd> — проекты · <kbd>Esc</kbd> — закрыть окно.</p><button type="button" class="lab-button" id="openCommands">Открыть командную панель</button></article>
+        <article class="lab-card game-card"><span class="lab-kicker">11 / REACTION TEST</span><h3>Проверь реакцию</h3><p>Нажми кнопку, когда она станет зелёной. Не торопись!</p><div class="game-readout" id="reactionResult">Готов?</div><button type="button" class="lab-button game-button" id="reactionStart">Начать тест</button><small id="reactionBest">Лучший результат: —</small></article>
+        <article class="lab-card game-card"><span class="lab-kicker">12 / CLICK RUSH</span><h3>Клик-челлендж</h3><p>Сколько раз успеешь нажать за 10 секунд?</p><div class="game-readout" id="clickScore">0 кликов</div><button type="button" class="lab-button game-button" id="clickStart">Старт · 10 сек</button><small id="clickStatus">Тренируй скорость пальцев.</small></article>
+        <article class="lab-card game-card"><span class="lab-kicker">13 / MEMORY</span><h3>Запомни последовательность</h3><p>Повтори подсвеченные кнопки в правильном порядке.</p><div class="memory-pad" id="memoryPad"><button type="button" data-pad="0" aria-label="Кнопка 1"></button><button type="button" data-pad="1" aria-label="Кнопка 2"></button><button type="button" data-pad="2" aria-label="Кнопка 3"></button><button type="button" data-pad="3" aria-label="Кнопка 4"></button></div><div class="game-readout" id="memoryStatus">Раунд 0</div><button type="button" class="lab-button game-button" id="memoryStart">Играть</button></article>
+        <article class="lab-card game-card"><span class="lab-kicker">14 / TYPING SPEED</span><h3>Тест скорости печати</h3><p id="typingPrompt">Нажми «Новый текст», чтобы начать.</p><textarea id="typingInput" rows="3" placeholder="Печатай текст здесь..." disabled></textarea><div class="lab-metrics"><b id="typingWpm">0 <small>слов/мин</small></b><b id="typingAccuracy">100 <small>% точно</small></b></div><button type="button" class="lab-button game-button" id="typingNew">Новый текст</button></article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="assistant">
+      <div class="section-heading"><div><span class="section-index">07 — LOCAL ASSISTANT</span><h2>IX <em>ASSISTANT</em></h2></div><p>Спроси о проектах,<br>навыках или контактах.</p></div>
+      <div class="assistant-widget" data-telegram="{{ telegram }}" data-email="{{ email }}">
+        <div class="assistant-avatar">IX</div>
+        <div class="assistant-main">
+          <div class="assistant-status"><span></span> IX ASSISTANT <b class="assistant-mode">ЛОКАЛЬНЫЙ РЕЖИМ</b></div>
+          <div class="assistant-suggestions" aria-label="Примеры вопросов">
+            <button type="button" data-ask="Какие проекты есть?">Проекты</button>
+            <button type="button" data-ask="Какие технологии ты используешь?">Технологии</button>
+            <button type="button" data-ask="Как связаться?">Контакты</button>
+          </div>
+          <div class="assistant-messages" id="assistantMessages" aria-live="polite"><p class="assistant-message assistant-answer">Привет! Я помогу быстро найти информацию на этом сайте. Например, спроси: «Какие проекты есть?»</p></div>
+          <form class="assistant-form" id="assistantForm">
+            {% csrf_token %}
+            <input id="assistantInput" type="text" placeholder="Задай вопрос о портфолио..." autocomplete="off" aria-label="Вопрос помощнику">
+            <button type="submit" aria-label="Отправить вопрос">↗</button>
+          </form>
+          <div class="assistant-footer"><button type="button" id="clearAiChat">Очистить чат</button><button type="button" id="exportAiChat">Экспорт переписки</button><span id="aiModeLabel">РЕЖИМ: ЛОКАЛЬНЫЙ</span></div>
+          <p class="widget-note">Локальный помощник отвечает по заранее заданным сценариям и данным портфолио. Это не нейросеть; API-ключ и подключение к интернет-сервисам не требуются.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section reveal" id="contact">
+      <span class="section-index">07 — LET'S CONNECT</span>
+      <h2>ЕСТЬ <em>ИДЕЯ?</em><br>ДАВАЙ ОБСУДИМ.</h2>
+      <p>Открыт к общению, совместным проектам и новым возможностям.</p>
+      <div class="contact-actions">
+        <a class="button button-primary" href="https://t.me/{{ telegram }}" target="_blank" rel="noopener noreferrer">Написать в Telegram <span>↗</span></a>
+<a class="button button-ghost"
+   href="https://www.instagram.com/darknight.dev1/"
+   target="_blank"
+   rel="noopener noreferrer">
+    Написать Instagram <span>↗</span>
+</a>
+        <a class="button button-ghost" href="mailto:{{ email }}">Отправить email <span>↗</span></a>
+        <button class="button button-ghost copy-email" type="button" data-copy="{{ email }}">Копировать email <span>▣</span></button>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <div class="contact-form-heading"><span>QUICK MESSAGE</span><small>Сообщение сохранится в панели администратора</small></div>
+        {% csrf_token %}
+        <div class="contact-form-row"><label>Твоё имя<input type="text" name="sender" maxlength="70" placeholder="Как к тебе обращаться?" required></label><label>Тема<input type="text" name="subject" maxlength="90" placeholder="Тема сообщения" required></label></div>
+        <label>Email для ответа<input type="email" name="email" maxlength="254" placeholder="you@example.com"></label><label>Сообщение<textarea name="message" rows="4" maxlength="1200" placeholder="Напиши пару слов о своей идее..." required></textarea></label>
+        <button class="button button-primary" type="submit">Отправить сообщение <span>↗</span></button>
+      </form>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#home"><span class="brand-icon">IX</span><span>IXLOSBEK<span class="brand-dot">.</span></span></a><span>© {{ name }} · Узбекистан · 2026</span><a href="#home">НАВЕРХ ↑</a></footer>
+
+<div class="command-palette" id="commandPalette" aria-hidden="true">
+  <div class="command-palette-card" role="dialog" aria-modal="true" aria-labelledby="paletteTitle">
+    <div class="command-palette-head"><span id="paletteTitle">БЫСТРАЯ НАВИГАЦИЯ</span><button type="button" id="paletteClose" aria-label="Закрыть">×</button></div>
+    <label class="palette-search"><span>⌕</span><input id="paletteSearch" type="search" placeholder="Найти раздел или действие..." autocomplete="off"></label>
+    <div class="palette-items" id="paletteItems">
+      <button type="button" data-jump="#home"><span>⌂</span><span>Главная</span><kbd>H</kbd></button>
+      <button type="button" data-jump="#projects"><span>▦</span><span>Проекты</span><kbd>P</kbd></button>
+      <button type="button" data-jump="#skills"><span>⌘</span><span>Навыки</span><kbd>S</kbd></button>
+      <button type="button" data-jump="#timeline"><span>◷</span><span>Мой путь</span><kbd>T</kbd></button>
+      <button type="button" data-jump="#console"><span>$_</span><span>Терминал</span><kbd>1</kbd></button>
+      <button type="button" data-jump="#contact"><span>↗</span><span>Контакты</span><kbd>C</kbd></button>
+      <button type="button" data-action="theme"><span>◐</span><span>Сменить тему</span><kbd>D</kbd></button>
+      <button type="button" data-action="fx"><span>✧</span><span>Анимация фона</span><kbd>M</kbd></button>
+      <button type="button" data-action="share"><span>⇧</span><span>Поделиться сайтом</span></button>
+    </div>
+    <div class="palette-foot"><span>ESC — закрыть</span><span>CTRL / ⌘ + K — открыть</span></div>
+  </div>
+</div>
+
+<div class="preview-modal" id="previewModal" aria-hidden="true">
+  <div class="preview-card" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+    <div class="preview-top"><span id="previewNumber">PROJECT / 00</span><button type="button" id="previewClose" aria-label="Закрыть">×</button></div>
+    <h2 id="previewTitle">Название проекта</h2>
+    <p id="previewDescription"></p>
+    <div class="chips" id="previewTags"></div>
+    <div class="preview-actions"><a class="button button-primary" id="previewDetail" href="#">Подробнее <span>→</span></a><a class="button button-ghost" id="previewLive" href="#" target="_blank" rel="noopener noreferrer">Открыть проект ↗</a></div>
+  </div>
+</div>
+
+<div class="atmosphere-control" id="atmosphereControl" aria-label="Управление анимированным фоном">
+  <span class="atmosphere-orb" aria-hidden="true"></span>
+  <span class="atmosphere-copy"><b>ATMOSPHERE</b><small id="atmosphereStatus">LIVE / ACTIVE</small></span>
+  <button id="atmosphereToggle" type="button" aria-pressed="false" aria-label="Приостановить анимацию фона">Пауза</button>
+</div>
+<button class="back-to-top" id="backToTop" type="button" aria-label="Наверх">↑</button>
+<div class="site-toast" id="siteToast" role="status" aria-live="polite"></div>
+
+<div class="secret-modal" id="secretModal" style="display: none;">
+    <div class="secret-box">
+        <button id="secretClose" aria-label="Закрыть">×</button>
+        <h2>SECRET ACCESS</h2>
+        <p>Введи секретный код</p>
+        <input type="password" id="secretCode"
+               placeholder="Введите код" maxlength="4">
+        <button id="secretSubmit">РАЗБЛОКИРОВАТЬ</button>
+        <p id="secretError"></p>
+        <div id="secretMessage" style="display: none;">
+            <h2>Dark_Night</h2>
+            <p>любит Дурдону ❤️</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
